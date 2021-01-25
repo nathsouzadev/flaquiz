@@ -13,7 +13,7 @@ const QuizBackground = styled.div`
     background-image: none;
     &:after {
       content: "";
-      background-size: cover;
+      background-size: 100vh;
     background-position: center;
       background-image:
         linear-gradient(rgba(100, 10, 20, 0.7),rgba(56, 55, 54, 0.2)),
