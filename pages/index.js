@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import db from '../db.json';
+import HeadQuiz from '../src/components/Head';
 import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
@@ -25,25 +26,28 @@ const QuizContainer = styled.div`
 
 export default function Home() {
   return (
-    <QuizBackground backgroundImage={db.bg}>
-      <QuizContainer>
-        <Widget>
-          <Widget.Header>
-            A América é Rubro-Negra!
-          </Widget.Header>
-          <Widget.Content>
-            <h1>Você sabe tudo sobre o time campeão da Libertadores de 2019?</h1>
-          </Widget.Content>
-        </Widget>
+    <>
+      <HeadQuiz/>
+      <QuizBackground backgroundImage={db.bg}>
+        <QuizContainer>
+          <Widget>
+            <Widget.Header>
+              A América é Rubro-Negra!
+            </Widget.Header>
+            <Widget.Content>
+              <h1>Você sabe tudo sobre o time campeão da Libertadores de 2019?</h1>
+            </Widget.Content>
+          </Widget>
 
-        <Widget>
-          <Widget.Content>
-            <h1>Você sabe tudo sobre o time campeão da Libertadores de 2019?</h1>
-          </Widget.Content>
-        </Widget>
-        <Footer/>
-      </QuizContainer>
-      <GitHubCorner/>
-    </QuizBackground>
+          <Widget>
+            <Widget.Content>
+              <h1>Teste seus conhecimentos sobre o hitórico time do Flamengo</h1>
+            </Widget.Content>
+          </Widget>
+          <Footer/>
+        </QuizContainer>
+        <GitHubCorner projectUrl="https://github.com/nathyts/flaquiz"/>
+      </QuizBackground>
+    </>
   )
 }
