@@ -18,6 +18,45 @@ const Widget = styled.div`
     font-weight: 400;
     line-height: 1;
   }
+  form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 32px 0;
+    input {
+      margin-bottom: 25px;
+      height: 38px;
+      border-radius: ${({ theme }) => theme.borderRadius};
+      background-image: linear-gradient(rgba(100, 0, 0, 1),rgba(0, 0, 0, 0.2));
+      border: 1px solid #FF4500;
+      outline: none;
+      padding: 0 16px;
+      color: white;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+    button {
+      height: 38px;
+      outline: none;
+      border: 1px solid #FF4500;
+      border-radius: ${({ theme }) => theme.borderRadius};
+      background-color: #363636;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12),
+        0px 2px 2px rgba(0, 0, 0, 0.24);
+      span {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+      :enabled {
+        background-color: red;
+        cursor: pointer;
+      }
+    }
+  }
 `;
 
 Widget.Header = styled.header`
