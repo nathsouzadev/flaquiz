@@ -1,33 +1,80 @@
 {
     "bg": "https://wallpapercave.com/wp/wp4979117.jpg",
+    "logo": "https://logospng.org/download/copa-libertadores/logo-copa-libertadores-256.png",
     "title": "Quiz CSS da Alura",
     "description": "Teste os seus conhecimentos sobre CSS e vamos ver quantos layouts você vai deixar de quebrar",
     "questions": [
       {
-        "image": "https://media.giphy.com/media/xUOxf3yDKCuwpOlT3i/giphy.gif",
-        "title": "Como fazer um seletor por id via CSS?",
+        "image": "https://media.gettyimages.com/photos/gabriel-barbosa-of-flamengo-scores-the-first-goal-of-his-team-during-picture-id1189601148?s=2048x2048",
+        "title": "Quem marcou os gols da vitória do Flamengo?",
         "description": "Essa é pra aquecer",
-        "answer": 2,
+        "answer": 0,
         "alternatives": [
-          ".elemento",
-          "*elemento",
-          "#elemento",
-          "%elemento"
+          "Gabigol",
+          "Bruno Henrique",
+          "Arrascaeta",
+          "Everton Ribeiro",
+          "Diego"
         ]
       },
       {
-        "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-        "title": "Como fazer um background gradiente com css?",
-        "description": "Faz tempo em haha",
-        "answer": 0,
+        "image": "https://media.gettyimages.com/photos/rafael-santos-borre-of-river-plate-celebrates-after-scoring-the-first-picture-id1189588784?s=2048x2048",
+        "title": "Quem fez e qual o tempo do primeiro gol do jogo?",
+        "description": "Essa já deu uma complicada",
+        "answer": 2,
         "alternatives": [
-           "background: linear-gradient(#e66465, #9198e5);",
-           "background: gradient(#e66465, #9198e5);"
+           "Rafael Borré, aos 64min",
+           "Lucas Pratto, aos 14min",
+           "Rafael Borré, aos 14min",
+           "Pinolla, aos 64min",
+           "Lucas Prato, aos 64min"
+        ]
+      },
+      {
+        "image": "https://media.gettyimages.com/photos/aerial-view-of-the-stadium-during-the-pregame-show-prior-to-the-final-picture-id1189585588?s=2048x2048",
+        "title": "Qual o nome do estádio onde foi disputada a final?",
+        "description": "Vamos facilitar um pouco...",
+        "answer": 4,
+        "alternatives": [
+          "Maracanã",
+          "La Bombonera",
+          "Monumental de Nuñez",
+          "Estádio Azteca",
+          "Monumental de Lima"
+        ]
+      },
+      {
+        "image": "https://media.gettyimages.com/photos/enzo-perez-of-river-plate-argues-with-bruno-henrique-of-flamengo-the-picture-id1189594898?s=2048x2048",
+        "title": "Qual destes jogadores não entrou em campo na final?",
+        "description": "Vamos complicar um pouco...",
+        "answer": 2,
+        "alternatives": [
+          "Piris da Motta",
+          "De La Cruz",
+          "Reinier",
+          "Casco",
+          "Vitinho"
+        ]
+      },
+      {
+        "image": "https://media.gettyimages.com/photos/gabriel-barbosa-of-flamengo-celebrates-after-scoring-the-the-second-picture-id1189600091?s=2048x2048",
+        "title": "Qual o tempo dos gols da virada do Flamengo?",
+        "description": "Agora é hora de mostrar que você realmente viu o jogo",
+        "answer": 1,
+        "alternatives": [
+          "80min e 85min",
+          "88min e 91min",
+          "85min e 88min",
+          "90min e 93min",
+          "89min e 91min"
         ]
       }
     ],
     "external": [
-      ""
+      "https://aluraquiz-css.omariosouto.vercel.app/",
+      "https://aluraquiz-devsoutinho.omariosouto.vercel.app/",
+      "https://aluraquiz-base.f3ferreira.vercel.app/",
+      "https://alura-quiz-delta.vercel.app/"
     ],
     "theme": {
       "colors": {
@@ -36,7 +83,8 @@
         "mainBg": "#171B35",
         "contrastText": "#FFFFFF",
         "wrong": "#FF5722",
-        "success": "#4CAF50"
+        "success": "#4CAF50",
+        "black": "#000000"
       },
       "borderRadius": "4px"
     }

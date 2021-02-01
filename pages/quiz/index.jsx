@@ -1,0 +1,193 @@
+import { useState, useEffect } from 'react';
+import Widget from '../../src/components/Widget';
+import GitHubCorner from '../../src/components/GitHubCorner';
+import QuizBackground from '../../src/components/QuizBackground';
+import QuizContainer from '../../src/components/QuizContainer';
+import AlternativeForm from '../../src/components/AlternativeForm';
+import Button from '../../src/components/Button';
+import BackLinkArrow from '../../src/components/BackLinkArrow';
+import db from '../../db.json';
+
+function ResultWidget({ results }){
+  return(
+    <Widget>
+      <Widget.Header>
+        Resultados
+      </Widget.Header>
+      <Widget.Content>
+        <p>
+          Você acertou
+          {' '}
+          {/* {result.reduce((somaAtual, resAtual)=> {
+            if(resAtual) {
+              return somaAtual++
+            }
+            return somaAtual;
+          }, 0)} */}
+          {results.filter((res) => res).length}
+          {' '}
+          perguntas
+        </p>
+        <ul>
+          {results.map((res, index) => (
+            <li key={`res_${res}`}>
+              #{index + 1}
+              {res === true ? 'Acertou' : 'Errou'}
+            </li>
+          ))}
+        </ul>
+      </Widget.Content>
+    </Widget>
+  )
+}
+
+function LoadingWidget() {
+  return (
+    <Widget>
+      <Widget.Header>
+        Prepare-se
+      </Widget.Header>
+      <Widget.Content>
+        <img width={280} src="https://media.giphy.com/media/Vx8MSphrScTAc/giphy.gif"/>
+      </Widget.Content>
+    </Widget>
+  );
+}
+
+function QuestionWidget({ 
+  question,
+  totalQuestions,
+  questionIndex,
+  onSubmit, addResult
+}) {
+  const questionId = `question__${questionIndex}`;
+  const [selected, setSelected] = useState(undefined);
+  const [isQuestionSubmit, setIsQuestionSubmit] = useState(false);
+  const isCorrect = selected === question.answer;
+  const hasAlternativeSelected = selected !== undefined;
+
+  return (
+    <Widget>
+      <Widget.Header>
+        <BackLinkArrow href="/"/>
+        <h3>
+          Pergunta {questionIndex + 1} de {totalQuestions}
+        </h3>
+      </Widget.Header>
+      <img
+        alt="descrição"
+        style={{
+          width: '100%',
+          height: '150px',
+          objectFit: 'cover',
+        }}
+        src={question.image}
+      />
+      <Widget.Content>
+        <h2>
+          {question.title}
+        </h2>
+        <p>
+          {question.description}
+        </p>
+
+        <AlternativeForm
+          onSubmit={(e) =>{
+          e.preventDefault();
+          setIsQuestionSubmit(true);
+          setTimeout(() => {
+            addResult(isCorrect);
+            onSubmit();
+            setIsQuestionSubmit(false);
+            setSelected(undefined);
+          }, 3000);
+        }}>
+          {question.alternatives.map((alternative, alternativeIndex) => {
+            const alternativeId = `alternative__${alternativeIndex}`;
+            const alternativeStatus = isCorrect ? 'SUCCESS' : 'ERROR';
+            const isSelected = selected === alternativeIndex;
+            return (
+              <Widget.Topic
+                as="label"
+                key={alternativeId}
+                htmlFor={alternativeId}
+                data-selected={isSelected}
+                data-status={isQuestionSubmit && alternativeStatus}
+              >
+                <input 
+                  style={{ display: 'none' }}
+                  name={questionId}
+                  id={alternativeId}
+                  onChange={() => setSelected(alternativeIndex)}
+                  type="radio"
+                />
+                {alternative}
+              </Widget.Topic>
+            )
+          })}
+          <Button type="submit" disabled={!hasAlternativeSelected}>
+            Confirmar
+          </Button>
+        </AlternativeForm>
+      </Widget.Content>
+    </Widget>
+  );
+}
+
+const screenStates = {
+  LOADING: 'LOADING',
+  QUIZ: 'QUIZ',
+  RESULT: 'RESULT',
+};
+
+export default function QuizPage() {
+  const [screenState, setScreenState] = useState(screenStates.LOADING)
+  const [results, setResults] = useState([]);
+  const totalQuestions = db.questions.length;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const questionIndex = currentIndex;
+  const question = db.questions[questionIndex];
+
+  function addResult(result){
+    setResults([
+      ...results,
+      result,
+    ]);
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setScreenState(screenStates.QUIZ)
+    }, 2000);
+  }, []);
+
+  function handleSubmit() {
+    const nextQuestion = questionIndex + 1
+    nextQuestion < totalQuestions ? setCurrentIndex(nextQuestion) : setScreenState(screenStates.RESULT)
+  }
+
+  return (
+    <div>
+      <QuizBackground backgroundImage={db.bg}>
+        <QuizContainer>    
+          {screenState === screenStates.QUIZ && 
+            (
+              <QuestionWidget
+                question={question}
+                questionIndex = {questionIndex}
+                totalQuestions = {totalQuestions}
+                onSubmit = {handleSubmit}
+                addResult={addResult}
+              />
+            )
+          }
+
+          {screenState === screenStates.LOADING && <LoadingWidget />}
+
+          {screenState === screenStates.RESULT && <ResultWidget results={results} />}
+        </QuizContainer>
+        <GitHubCorner projectUrl="https://github.com/nathyts/flaquiz" />
+      </QuizBackground>
+    </div>
+  );
+}
